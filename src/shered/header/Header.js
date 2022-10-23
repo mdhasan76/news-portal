@@ -22,7 +22,7 @@ const Header = () => {
                                 Dank memes
                             </Nav.Link>
                         </Nav>
-                        <div className=''>
+                        <div className='d-lg-none'>
                             <LeftSideNav />
                         </div>
                     </Navbar.Collapse>
