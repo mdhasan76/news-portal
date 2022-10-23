@@ -1,12 +1,14 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
-import Image from 'react-bootstrap/Image'
-import { BsFillBookmarkFill, BsShare } from "react-icons/bs";
+import { Button, Card } from 'react-bootstrap';
+import { BsFillBookmarkFill, BsShare } from 'react-icons/bs';
 import { FaEye, FaStar } from 'react-icons/fa';
+import { Link, useLoaderData } from 'react-router-dom';
+import Image from 'react-bootstrap/Image'
 
-const News = ({ news }) => {
-    const { _id, details, image_url, title, total_view, rating, author } = news;
+const NewsDetails = () => {
+    const newserData = useLoaderData();
+
+    const { details, image_url, title, total_view, rating, author } = newserData;
     const { name, published_date, img } = author;
     return (
         <div>
@@ -15,7 +17,7 @@ const News = ({ news }) => {
                     <div className='d-flex align-items-center'>
                         <Image src={img} style={{ height: '50px' }} roundedCircle alt="" />
                         <div className='ms-2'>
-                            {name === '' || null ? <h5 className='mb-0'>NOT Found</h5> : <h5 className='mb-0'>{name}</h5>}
+                            {name === '' || null ? <h5>NOT Found</h5> : <h5>{name}</h5>}
                             <p>{published_date}</p>
                         </div>
                     </div>
@@ -29,9 +31,10 @@ const News = ({ news }) => {
                     } />
                     <Card.Text>
                         {
-                            details.length > 250 ? <p>{details.slice(0, 250)} ..<Link to={`/news/${_id}`}>see more </Link></p> : details
+                            details
                         }
                     </Card.Text>
+                    <Button variant="primary"> <Link to={'/'} className="text-white text-decoration-none">Back to home</Link> </Button>
                 </Card.Body>
                 <Card.Footer className="text-muted d-flex justify-content-between">
                     <div>
@@ -49,6 +52,5 @@ const News = ({ news }) => {
 
         </div>
     );
-};
-
-export default News;
+}
+export default NewsDetails;
