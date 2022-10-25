@@ -1,22 +1,44 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { FaGoogle, FaGithub, FaFacebook, FaTwitter, FaWhatsapp, FaTwitch, FaDiscord } from 'react-icons/fa';
+import { FaGoogle, FaFacebook, FaTwitter, FaWhatsapp, FaTwitch, FaDiscord } from 'react-icons/fa';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Carousel from 'react-bootstrap/Carousel';
 import img1 from '../../assets/brand1.webp'
 import img2 from '../../assets/brand2.jfif'
+import { AuthContext } from '../../layout/AuthProvider';
 
 
 const RightSideNav = () => {
+    const { googleSignIn, facebookSignIn } = useContext(AuthContext);
+
+    const handleGoogle = () => {
+        googleSignIn()
+            .then(res => {
+                console.log(res.user)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    const handleFacebook = () => {
+        facebookSignIn()
+            .then(res => {
+                console.log(res.user)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
     return (
         <div>
 
             {/* Button Group  */}
             <div>
                 <ButtonGroup vertical className='w-100' >
-                    <Button variant='outline-primary' className="mb-1"> <FaGoogle /> Log in with Google</Button>
-                    <Button variant="outline-dark"> <FaGithub /> Log in with Github</Button>
+                    <Button onClick={handleGoogle} variant='outline-primary' className="mb-1"> <FaGoogle /> Log in with Google</Button>
+                    <Button onClick={handleFacebook} variant="outline-dark"> <FaFacebook /> Log in with Facebook</Button>
                 </ButtonGroup>
             </div>
 
